@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Movies Catalog</string>
+
+    <string name="bottom_navigation_home">HOME</string>
+    <string name="bottom_navigation_profile">PROFILE</string>
+
+</resources>
