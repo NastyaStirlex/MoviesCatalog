@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">Movies Catalog</string>
 
-    <string name="bottom_navigation_home">HOME</string>
-    <string name="bottom_navigation_profile">PROFILE</string>
-
+    <string name="bottom_navigation_main">Главная</string>
+    <string name="bottom_navigation_profile">Профиль</string>
+    <string name="favourite">Избранное</string>
+    <string name="gallery">Галерея</string>
+    <string name="look">Смотреть</string>
 </resources>
