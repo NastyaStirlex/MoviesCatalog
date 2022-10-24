@@ -2,7 +2,6 @@ package com.example.moviescatalog.SignInScreen
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
@@ -11,16 +10,17 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import com.example.moviescatalog.R
 
 @Composable
 fun SignInScreen() {
-
+    val login = remember{ mutableStateOf("") }
+    val password = remember{ mutableStateOf("") }
     Box(modifier = Modifier
         .fillMaxSize(),
         contentAlignment = Alignment.TopCenter
@@ -51,8 +51,8 @@ fun SignInScreen() {
         ) {
             Column(modifier = Modifier) {
                 OutlinedTextField(
-                    value = "",
-                    onValueChange = {},
+                    value = login.value,
+                    onValueChange = { login.value = it },
                     placeholder = { Text(stringResource(R.string.text_field_login)) },
                     colors = TextFieldDefaults.outlinedTextFieldColors(
                         textColor = Color(0xffEF3A01),
@@ -67,8 +67,10 @@ fun SignInScreen() {
                 )
                 Spacer(modifier = Modifier.height(18.dp))
                 OutlinedTextField(
-                    value = "",
-                    onValueChange = {},
+                    value = password.value,
+                    singleLine = true,
+                    visualTransformation = PasswordVisualTransformation(),
+                    onValueChange = { password.value = it },
                     placeholder = { Text(stringResource(R.string.text_field_pass)) },
                     colors = TextFieldDefaults.outlinedTextFieldColors(
                         textColor = Color(0xffEF3A01),
