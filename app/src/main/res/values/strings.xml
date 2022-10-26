@@ -3,5 +3,21 @@
 
     <string name="bottom_navigation_home">HOME</string>
     <string name="bottom_navigation_profile">PROFILE</string>
+    <string name="text_signup">Регистрация</string>
+    <string name="text_field_login">Логин</string>
+    <string name="text_field_email">E-mail</string>
+    <string name="text_field_name">Имя</string>
+    <string name="text_field_pass">Пароль</string>
+    <string name="text_field_check_pass">Подтвердите пароль</string>
+    <string name="text_field_birthdate">Дата рождения</string>
+    <string name="sex_man">Мужчина</string>
+    <string name="sex_woman">Женщина</string>
+    <string name="button_signup">Зарегистрироваться</string>
+    <string name="button_have_account_yet">У меня уже есть аккаунт</string>
+
+
+
+
+
 
 </resources>
