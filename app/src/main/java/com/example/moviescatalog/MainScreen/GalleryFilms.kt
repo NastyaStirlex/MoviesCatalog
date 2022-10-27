@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun GalleryFilms(@StringRes title: Int, modifier: Modifier = Modifier) {
-    Column(modifier) {
+    //Column(modifier) {
         Text(
             text = stringResource(title),
             style = MaterialTheme.typography.titleMedium,
@@ -31,8 +31,8 @@ fun GalleryFilms(@StringRes title: Int, modifier: Modifier = Modifier) {
                 .padding(horizontal = 18.dp)
                 .padding(bottom = 9.dp, top = 52.dp)
         )
-        GalleryFilmsColumn()
-    }
+        //GalleryFilmsColumn()
+    //}
 }
 
 @Composable
@@ -53,31 +53,31 @@ fun GalleryFilmsElement(@DrawableRes drawable: Int,
                    modifier: Modifier = Modifier
 ) {
     val ctx = LocalContext.current
-    Row(horizontalArrangement = Arrangement.spacedBy(50.dp)) {
-        Image(
-            painter = painterResource(drawable),
-            contentDescription = null,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .width(132.dp)
-                .height(176.dp)
-                .clickable(
-                    enabled = true,
-                    onClickLabel = "Clickable image",
-                    onClick = {
-                        Toast
-                            .makeText(ctx, "Image clicked", Toast.LENGTH_SHORT)
-                            .show()
-                    }
+            Row(horizontalArrangement = Arrangement.spacedBy(50.dp)) {
+                Image(
+                    painter = painterResource(drawable),
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .width(132.dp)
+                        .height(176.dp)
+                        .clickable(
+                            enabled = true,
+                            onClickLabel = "Clickable image",
+                            onClick = {
+                                Toast
+                                    .makeText(ctx, "Image clicked", Toast.LENGTH_SHORT)
+                                    .show()
+                            }
+                        )
                 )
-        )
 
-        Card {
-            Text("Name")
-            Text("Year" + "*" + "Country")
-            Text("Drama, criminal")
-        }
-    }
+                Card {
+                    Text("Name")
+                    Text("Year" + "*" + "Country")
+                    Text("Drama, criminal")
+                }
+            }
 }
 
 private val galleryFilmData = mutableListOf(
