@@ -17,12 +17,12 @@ import com.example.moviescatalog.R
 
 @Composable
 fun MainScreen(modifier: Modifier = Modifier) {
-    LazyColumn{item() {Banner()}}
-    LazyColumn(modifier = Modifier.padding(top = 390.dp)) {
+    Banner()
+    LazyColumn(modifier = Modifier.padding(top = 366.dp)) {
         item() {FavouriteFilms(title = R.string.favourite, modifier)}
 
         item {GalleryFilms(title = R.string.gallery, modifier
-            .padding(vertical = 30.dp))}
+            .padding(bottom = 30.dp))}
 
         items(galleryFilmData) { item ->
             GalleryFilmsElement(item)

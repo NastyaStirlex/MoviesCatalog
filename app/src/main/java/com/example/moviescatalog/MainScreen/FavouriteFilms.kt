@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun FavouriteFilms(@StringRes title: Int, modifier: Modifier = Modifier) {
-    Column(modifier) {
+    Column(modifier.padding(top = 36.dp)) {
         Text(
             text = stringResource(title),
             style = MaterialTheme.typography.titleMedium,
