@@ -22,7 +22,6 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun GalleryFilms(@StringRes title: Int, modifier: Modifier = Modifier) {
-    //Column(modifier) {
         Text(
             text = stringResource(title),
             style = MaterialTheme.typography.titleMedium,
@@ -31,59 +30,50 @@ fun GalleryFilms(@StringRes title: Int, modifier: Modifier = Modifier) {
                 .padding(horizontal = 18.dp)
                 .padding(bottom = 9.dp, top = 52.dp)
         )
-        //GalleryFilmsColumn()
-    //}
 }
 
+//@Composable
+//fun GalleryFilmsColumn(modifier: Modifier = Modifier) {
+//    LazyColumn(
+//        verticalArrangement = Arrangement.spacedBy(18.dp),
+//        modifier = modifier
+//            .padding(start = 18.dp)
+//    ) {
+//        items(galleryFilmData) { item ->
+//            GalleryFilmsElement(item)
+//        }
+//    }
+//}
+
 @Composable
-fun GalleryFilmsColumn(modifier: Modifier = Modifier) {
-    LazyColumn(
-        verticalArrangement = Arrangement.spacedBy(18.dp),
-        modifier = modifier
-            .padding(start = 18.dp)
-    ) {
-        items(galleryFilmData) { item ->
-            GalleryFilmsElement(item)
+fun GalleryFilmsElement(@DrawableRes drawable: Int
+) {
+    val ctx = LocalContext.current
+    Box(modifier = Modifier.padding(bottom = 18.dp, start = 18.dp)) {
+        Image(
+            painter = painterResource(drawable),
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .width(132.dp)
+                .height(176.dp)
+                .clickable(
+                    enabled = true,
+                    onClickLabel = "Clickable image",
+                    onClick = {
+                        Toast
+                            .makeText(ctx, "Image clicked", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                )
+        )
+        Column(
+            modifier = Modifier
+                .padding(start = 149.dp)
+        ) {
+            Text("Name", color = Color(0xffEF3A01))
+            Text("Year" + "*" + "Country", color = Color(0xffEF3A01))
+            Text("Drama, criminal", color = Color(0xffEF3A01))
         }
     }
 }
-
-@Composable
-fun GalleryFilmsElement(@DrawableRes drawable: Int,
-                   modifier: Modifier = Modifier
-) {
-    val ctx = LocalContext.current
-            Row(horizontalArrangement = Arrangement.spacedBy(50.dp)) {
-                Image(
-                    painter = painterResource(drawable),
-                    contentDescription = null,
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .width(132.dp)
-                        .height(176.dp)
-                        .clickable(
-                            enabled = true,
-                            onClickLabel = "Clickable image",
-                            onClick = {
-                                Toast
-                                    .makeText(ctx, "Image clicked", Toast.LENGTH_SHORT)
-                                    .show()
-                            }
-                        )
-                )
-
-                Card {
-                    Text("Name")
-                    Text("Year" + "*" + "Country")
-                    Text("Drama, criminal")
-                }
-            }
-}
-
-private val galleryFilmData = mutableListOf(
-    com.example.moviescatalog.R.drawable.f_1,
-    com.example.moviescatalog.R.drawable.f_2,
-    com.example.moviescatalog.R.drawable.f_3,
-    com.example.moviescatalog.R.drawable.f_4,
-    com.example.moviescatalog.R.drawable.f_5,
-)
