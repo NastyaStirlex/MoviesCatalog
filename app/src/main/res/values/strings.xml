@@ -1,7 +1,17 @@
 <resources>
     <string name="app_name">Movies Catalog</string>
 
-    <string name="bottom_navigation_home">HOME</string>
-    <string name="bottom_navigation_profile">PROFILE</string>
+    <string name="bottom_navigation_profile">Профиль</string>
+    <string name="bottom_navigation_main">Главное</string>
+    <string name="text_email">E-mail</string>
+    <string name="text_link">Ссылка на аватарку</string>
+    <string name="text_name">Имя</string>
+    <string name="text_birthdate">Дата рождения</string>
+    <string name="text_sex">Пол</string>
+    <string name="sex_man">Мужчина</string>
+    <string name="sex_woman">Женщина</string>
+    <string name="button_save">Сохранить</string>
+    <string name="button_log_out_of_account">Выйти из аккаунта</string>
+
 
 </resources>
