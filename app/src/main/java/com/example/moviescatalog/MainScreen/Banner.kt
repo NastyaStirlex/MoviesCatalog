@@ -22,6 +22,20 @@ fun Banner() {
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .fillMaxWidth()
+//                .background(
+//                    Brush.verticalGradient(
+//                        0F to Color.Transparent,
+//                        .5F to Color.Black.copy(alpha = 0.5F),
+//                        5F to Color.Black.copy(alpha = 0.8F)
+//                    )
+//                )
+        )
+        Image(
+            painter = painterResource(com.example.moviescatalog.R.drawable.banner_back),
+            contentDescription = "",
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .fillMaxWidth()
         )
         Button(onClick = {}, modifier = Modifier
             .padding(top = 279.dp)
