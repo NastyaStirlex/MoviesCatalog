@@ -40,7 +40,7 @@ fun LaunchScreen() {
                         }))
                 // Customize the delay time
                 delay(3000L)
-                //navController.navigate("main_screen")
+                //navController.navigate(Screens.Main.route)
             }
             Column(modifier = Modifier
                 .fillMaxSize()
