@@ -7,9 +7,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import androidx.navigation.compose.rememberNavController
-import com.example.moviescatalog.LaunchScreen.LaunchScreen
-import com.example.moviescatalog.navigation.SetupNavHost
+import androidx.compose.ui.graphics.Color
+import com.example.moviescatalog.SignUpScreen.SignUpScreen
 import com.example.moviescatalog.ui.theme.MoviesCatalogTheme
 
 class MainActivity : ComponentActivity() {
@@ -19,11 +18,9 @@ class MainActivity : ComponentActivity() {
             MoviesCatalogTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    color = Color(0xff150D0B)
                 ) {
-                    val navController = rememberNavController()
-                    SetupNavHost(navController = navController)
-                    LaunchScreen(navController = navController)
+                    SignUpScreen()
                 }
             }
         }
