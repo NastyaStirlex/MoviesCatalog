@@ -1,4 +1,4 @@
-package com.example.moviescatalog.data.data.authapi
+package com.example.moviescatalog.data.authapi
 
 import kotlinx.serialization.Contextual
 import java.time.ZonedDateTime

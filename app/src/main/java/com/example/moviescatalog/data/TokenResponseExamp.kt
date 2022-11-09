@@ -1,4 +1,4 @@
-package com.example.moviescatalog.data.data
+package com.example.moviescatalog.data
 
 
 @kotlinx.serialization.Serializable

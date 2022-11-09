@@ -1,7 +1,7 @@
-package com.example.moviescatalog.data.data.authapi
+package com.example.moviescatalog.data.authapi
 
-import com.example.moviescatalog.data.data.Network
-import com.example.moviescatalog.data.data.TokenResponse
+import com.example.moviescatalog.data.Network
+import com.example.moviescatalog.data.TokenResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

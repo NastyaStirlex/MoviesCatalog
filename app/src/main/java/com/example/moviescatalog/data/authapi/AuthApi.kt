@@ -1,6 +1,6 @@
-package com.example.moviescatalog.data.data.authapi
+package com.example.moviescatalog.data.authapi
 
-import com.example.moviescatalog.data.data.TokenResponse
+import com.example.moviescatalog.data.TokenResponse
 import retrofit2.http.Body
 import retrofit2.http.POST
 

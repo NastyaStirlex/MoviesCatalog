@@ -1,7 +1,8 @@
-package com.example.moviescatalog.data.data
+package com.example.moviescatalog.data
 
-import com.example.moviescatalog.data.data.authapi.AuthApi
-import com.example.moviescatalog.data.data.authapi.AuthInterceptor
+import com.example.moviescatalog.utils.Constants.Companion.BASE_URL
+import com.example.moviescatalog.data.authapi.AuthApi
+import com.example.moviescatalog.data.authapi.AuthInterceptor
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
@@ -12,8 +13,6 @@ import retrofit2.Retrofit
 import java.util.concurrent.TimeUnit
 
 object Network {
-    private const val BASE_URL = "https://react-midterm.kreosoft.space/"
-
     private val json = Json {
         ignoreUnknownKeys = true
         coerceInputValues = true

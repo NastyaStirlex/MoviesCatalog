@@ -1,6 +1,6 @@
-package com.example.moviescatalog.data.data.authapi
+package com.example.moviescatalog.data.authapi
 
-import com.example.moviescatalog.data.data.Network
+import com.example.moviescatalog.data.Network
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response

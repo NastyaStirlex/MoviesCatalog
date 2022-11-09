@@ -1,4 +1,4 @@
-package com.example.moviescatalog.data.data.favouritemoviesapi
+package com.example.moviescatalog.data.favouritemoviesapi
 
 import retrofit2.http.POST
 import retrofit2.http.Path
