@@ -1,10 +1,11 @@
 package com.example.moviescatalog.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.moviescatalog.LaunchScreen.LaunchScreen
+import com.example.moviescatalog.SignInScreen.SignInScreen
 import com.example.moviescatalog.utils.Constants
 
 sealed class Screens(val route: String) {
@@ -23,22 +24,22 @@ fun SetupNavHost(navController: NavHostController) {
         startDestination = Screens.Launch.route
     ) {
         composable(route = Screens.Launch.route) {
-            //LaunchScreen()
+            LaunchScreen(navController = navController)
         }
         composable(route = Screens.Signin.route) {
-            //SigninScreen()
+            SignInScreen(navController = navController)
         }
         composable(route = Screens.Signup.route) {
-            //SignupScreen()
+            //SignupScreen(navController = navController)
         }
         composable(route = Screens.Main.route) {
-            //MainScreen()
+            //MainScreen(navController: NavController)
         }
         composable(route = Screens.Movie.route) {
-            //MovieScreen()
+            //MovieScreen(navController: NavController)
         }
         composable(route = Screens.Profile.route) {
-            //ProfileScreen()
+            //ProfileScreen(navController: NavController)
         }
     }
 }

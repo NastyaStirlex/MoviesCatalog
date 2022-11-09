@@ -16,7 +16,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.moviescatalog.R
+import com.example.moviescatalog.navigation.Screens
 import com.example.moviescatalog.ui.theme.MoviesCatalogTheme
+import com.example.moviescatalog.utils.Constants
 import kotlinx.coroutines.delay
 
 @Composable
@@ -41,7 +43,7 @@ fun LaunchScreen(navController: NavController) {
                         }))
                 // Customize the delay time
                 delay(3000L)
-                //navController.navigate(Screens.Main.route)
+                navController.navigate(Screens.Main.route)
             }
             Column(modifier = Modifier
                 .fillMaxSize()
