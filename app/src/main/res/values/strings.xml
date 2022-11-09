@@ -3,5 +3,9 @@
 
     <string name="bottom_navigation_home">HOME</string>
     <string name="bottom_navigation_profile">PROFILE</string>
+    <string name="text_field_login">Логин</string>
+    <string name="text_field_pass">Пароль</string>
+    <string name="out_button_login">Войти</string>
+    <string name="button_logup">Регистрация</string>
 
 </resources>

@@ -14,12 +14,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.moviescatalog.R
 import com.example.moviescatalog.ui.theme.MoviesCatalogTheme
 import kotlinx.coroutines.delay
 
 @Composable
-fun LaunchScreen() {
+fun LaunchScreen(navController: NavController) {
     MoviesCatalogTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
