@@ -14,9 +14,18 @@
     <string name="button_have_account_yet">У меня уже есть аккаунт</string>
     <string name="out_button_login">Войти</string>
     <string name="button_logup">Регистрация</string>
-    <string name="bottom_navigation_main">Главная</string>
-    <string name="bottom_navigation_profile">Профиль</string>
     <string name="favourite">Избранное</string>
     <string name="gallery">Галерея</string>
     <string name="look">Смотреть</string>
+    <string name="bottom_navigation_profile">Профиль</string>
+    <string name="bottom_navigation_main">Главное</string>
+    <string name="text_email">E-mail</string>
+    <string name="text_link">Ссылка на аватарку</string>
+    <string name="text_name">Имя</string>
+    <string name="text_birthdate">Дата рождения</string>
+    <string name="text_sex">Пол</string>
+    <string name="button_save">Сохранить</string>
+    <string name="button_log_out_of_account">Выйти из аккаунта</string>
+
+
 </resources>
