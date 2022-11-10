@@ -23,4 +23,9 @@
 
 
 
+    <string name="bottom_navigation_main">Главная</string>
+    <string name="bottom_navigation_profile">Профиль</string>
+    <string name="favourite">Избранное</string>
+    <string name="gallery">Галерея</string>
+    <string name="look">Смотреть</string>
 </resources>
