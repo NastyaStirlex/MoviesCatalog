@@ -1,4 +1,4 @@
-package com.example.moviescatalog.MainScreen
+package com.example.moviescatalog.screens.MainScreen
 
 import android.widget.Toast
 import androidx.annotation.DrawableRes

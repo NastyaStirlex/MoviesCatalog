@@ -1,4 +1,4 @@
-package com.example.moviescatalog.MainScreen
+package com.example.moviescatalog.screens.MainScreen
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -6,6 +6,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.moviescatalog.*
 import com.example.moviescatalog.R
 
@@ -16,13 +17,15 @@ import com.example.moviescatalog.R
  */
 
 @Composable
-fun MainScreen(modifier: Modifier = Modifier) {
-    Banner()
+fun MainScreen(navController: NavHostController,onWatchClick: () -> Unit, modifier: Modifier) {
+    Banner(onWatchClick)
     LazyColumn(modifier = Modifier.padding(top = 366.dp)) {
-        item() {FavouriteFilms(title = R.string.favourite, modifier)}
+        item() { FavouriteFilms(title = R.string.favourite, modifier) }
 
-        item {GalleryFilms(title = R.string.gallery, modifier
-            .padding(bottom = 30.dp))}
+        item {
+            GalleryFilms(title = R.string.gallery, modifier
+            .padding(bottom = 30.dp))
+        }
 
         items(galleryFilmData) { item ->
             GalleryFilmsElement(item)

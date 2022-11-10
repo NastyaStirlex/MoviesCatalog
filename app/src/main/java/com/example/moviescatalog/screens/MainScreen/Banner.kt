@@ -1,4 +1,4 @@
-package com.example.moviescatalog.MainScreen
+package com.example.moviescatalog.screens.MainScreen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -14,7 +14,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun Banner() {
+fun Banner(onWatchClick: () -> Unit) {
     Box(modifier = Modifier) {
         Image(
             painter = painterResource(com.example.moviescatalog.R.drawable.banner_foregr),
@@ -37,7 +37,7 @@ fun Banner() {
             modifier = Modifier
                 .fillMaxWidth()
         )
-        Button(onClick = {}, modifier = Modifier
+        Button(onClick = onWatchClick, modifier = Modifier
             .padding(top = 279.dp)
             .padding(start = 123.dp)
             .width(183.dp)

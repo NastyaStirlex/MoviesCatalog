@@ -1,10 +1,13 @@
 package com.example.moviescatalog.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.moviescatalog.screens.MainScreen.MainScreen
 import com.example.moviescatalog.screens.LaunchScreen.LaunchScreen
+import com.example.moviescatalog.screens.MovieScreen.MovieScreen
 import com.example.moviescatalog.screens.SignInScreen.SignInScreen
 import com.example.moviescatalog.screens.SignUpScreen.SignUpScreen
 import com.example.moviescatalog.utils.Constants
@@ -40,10 +43,16 @@ fun SetupNavHost(navController: NavHostController) {
             )
         }
         composable(route = Screens.Main.route) {
-            //MainScreen(navController: NavController)
+            MainScreen(
+                navController = navController,
+                onWatchClick = {
+                    navController.navigate(Screens.Movie.route)
+                               },
+                Modifier
+            )
         }
         composable(route = Screens.Movie.route) {
-            //MovieScreen(navController: NavController)
+            MovieScreen()
         }
         composable(route = Screens.Profile.route) {
             //ProfileScreen(navController: NavController)

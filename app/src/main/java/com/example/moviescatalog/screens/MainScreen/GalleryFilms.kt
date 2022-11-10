@@ -1,4 +1,4 @@
-package com.example.moviescatalog.MainScreen
+package com.example.moviescatalog.screens.MainScreen
 
 import android.widget.Toast
 import androidx.annotation.DrawableRes
@@ -46,8 +46,7 @@ fun GalleryFilms(@StringRes title: Int, modifier: Modifier = Modifier) {
 //}
 
 @Composable
-fun GalleryFilmsElement(@DrawableRes drawable: Int
-) {
+fun GalleryFilmsElement(@DrawableRes drawable: Int) {
     val ctx = LocalContext.current
     Box(modifier = Modifier.padding(bottom = 18.dp, start = 18.dp)) {
         Image(
