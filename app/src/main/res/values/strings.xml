@@ -14,6 +14,9 @@
     <string name="sex_woman">Женщина</string>
     <string name="button_signup">Зарегистрироваться</string>
     <string name="button_have_account_yet">У меня уже есть аккаунт</string>
+    <string name="out_button_login">Войти</string>
+    <string name="button_logup">Регистрация</string>
+
 
 
 

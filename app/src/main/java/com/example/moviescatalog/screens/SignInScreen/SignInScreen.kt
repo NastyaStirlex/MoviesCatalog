@@ -1,4 +1,4 @@
-package com.example.moviescatalog.SignInScreen
+package com.example.moviescatalog.screens.SignInScreen
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -15,11 +15,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.example.moviescatalog.R
+import com.example.moviescatalog.navigation.Screens
 
 @Composable
-fun SignInScreen(navController: NavController) {
+fun SignInScreen(onLoginClick: () -> Unit, onRegisterClick: () -> Unit) {
     val login = remember{ mutableStateOf("") }
     val password = remember{ mutableStateOf("") }
     Box(modifier = Modifier
@@ -39,7 +40,6 @@ fun SignInScreen(navController: NavController) {
                     alignment = Alignment.Center,
                     modifier = Modifier
                         .padding(top = 64.dp, start = 20.dp)
-
                 )
                 Image(painter = painterResource(R.drawable.appname), contentDescription = null, modifier = Modifier
                     .padding(top = 20.dp))
@@ -92,14 +92,14 @@ fun SignInScreen(navController: NavController) {
             contentAlignment = Alignment.BottomCenter) {
             Column(modifier = Modifier
             ) {
-                OutlinedButton(onClick = { /*TODO*/ }, modifier = Modifier
+                OutlinedButton(onClick = onLoginClick, modifier = Modifier
                     .fillMaxWidth(),
                     shape = RoundedCornerShape(4.dp),
                     border = BorderStroke(1.dp, Color(0xffB7B7B7))
                 ) {
                     Text(stringResource(R.string.out_button_login), color = Color(0xffEF3A01))
                 }
-                TextButton(onClick = { /*TODO*/ }, modifier = Modifier
+                TextButton(onClick = onRegisterClick, modifier = Modifier
                     .fillMaxWidth(),
                     shape = RoundedCornerShape(4.dp)
                 ) {

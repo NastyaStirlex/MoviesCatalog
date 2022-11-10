@@ -1,4 +1,4 @@
-package com.example.moviescatalog.SignUpScreen
+package com.example.moviescatalog.screens.SignUpScreen
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -16,7 +16,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun SignUpScreen() {
+fun SignUpScreen(onRegisterClick: () -> Unit, onLoginClick: () -> Unit) {
     var selectedMan by remember {mutableStateOf(false)}
     var selectedWoman by remember {mutableStateOf(false)}
     val login = remember{ mutableStateOf("") }
@@ -208,7 +208,7 @@ fun SignUpScreen() {
                 item() {
                     Column() {
                         OutlinedButton(
-                            onClick = { /*TODO*/ }, modifier = Modifier
+                            onClick = onRegisterClick, modifier = Modifier
                                 .fillMaxWidth(),
                             shape = RoundedCornerShape(4.dp),
                             border = BorderStroke(1.dp, Color(0xffB7B7B7))
@@ -219,7 +219,7 @@ fun SignUpScreen() {
                             )
                         }
                         TextButton(
-                            onClick = { /*TODO*/ }, modifier = Modifier
+                            onClick = onLoginClick, modifier = Modifier
                                 .fillMaxWidth(),
                             shape = RoundedCornerShape(4.dp)
                         ) {

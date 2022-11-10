@@ -4,8 +4,9 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.moviescatalog.LaunchScreen.LaunchScreen
-import com.example.moviescatalog.SignInScreen.SignInScreen
+import com.example.moviescatalog.screens.LaunchScreen.LaunchScreen
+import com.example.moviescatalog.screens.SignInScreen.SignInScreen
+import com.example.moviescatalog.screens.SignUpScreen.SignUpScreen
 import com.example.moviescatalog.utils.Constants
 
 sealed class Screens(val route: String) {
@@ -27,10 +28,16 @@ fun SetupNavHost(navController: NavHostController) {
             LaunchScreen(navController = navController)
         }
         composable(route = Screens.Signin.route) {
-            SignInScreen(navController = navController)
+            SignInScreen(
+                onLoginClick = { navController.navigate(Screens.Main.route) },
+                onRegisterClick = { navController.navigate(Screens.Signup.route) }
+            )
         }
         composable(route = Screens.Signup.route) {
-            //SignupScreen(navController = navController)
+            SignUpScreen(
+                onLoginClick = { navController.navigate(Screens.Signin.route) },
+                onRegisterClick = { navController.navigate(Screens.Main.route) }
+            )
         }
         composable(route = Screens.Main.route) {
             //MainScreen(navController: NavController)
