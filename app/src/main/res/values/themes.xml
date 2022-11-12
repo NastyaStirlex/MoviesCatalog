@@ -3,4 +3,5 @@
     <style name="Theme.MoviesCatalog" parent="android:Theme.Material.Light.NoActionBar">
         <item name="android:windowTranslucentStatus">true</item>/>
     </style>
+
 </resources>

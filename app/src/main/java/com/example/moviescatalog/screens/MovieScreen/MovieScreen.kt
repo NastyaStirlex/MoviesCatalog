@@ -1,107 +1,44 @@
 package com.example.moviescatalog.screens.MovieScreen
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.FavoriteBorder
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.lerp
 import androidx.compose.ui.unit.sp
 import me.onebone.toolbar.CollapsingToolbarScaffold
 import me.onebone.toolbar.ScrollStrategy
 import me.onebone.toolbar.rememberCollapsingToolbarScaffoldState
 
+
 @Composable
-fun MovieScreen() {
-//    val state = rememberCollapsingToolbarScaffoldState()
-//
-//    var enabled by remember { mutableStateOf(true) }
-//
-//    Box {
-//        CollapsingToolbarScaffold(
-//            modifier = Modifier.fillMaxSize(),
-//            state = state,
-//            scrollStrategy = ScrollStrategy.EnterAlwaysCollapsed,
-//            toolbarModifier = Modifier.background(MaterialTheme.colorScheme.primary),
-//            enabled = enabled,
-//            toolbar = {
-//                // Collapsing toolbar collapses its size as small as the that of
-//                // a smallest child. To make the toolbar collapse to 50dp, we create
-//                // a dummy Spacer composable.
-//                // You may replace it with TopAppBar or other preferred composable.
-//                Spacer(
-//                    modifier = Modifier
-//                        .fillMaxWidth()
-//                        .height(50.dp)
-//                )
-//
-//                Image(
-//                    painter = painterResource(com.example.moviescatalog.R.drawable.poster),
-//                    modifier = Modifier
-//                        .parallax(0.5f)
-//                        .height(300.dp)
-//                        .graphicsLayer {
-//                            // change alpha of Image as the toolbar expands
-//                            alpha = state.toolbarState.progress
-//                        },
-//                    contentScale = ContentScale.Crop,
-//                    contentDescription = null
-//                )
-//            }
-//        ) {
-//            LazyColumn(
-//                modifier = Modifier
-//                    .fillMaxSize()
-//            ) {
-//                items(
-//                    List(100) { "Hello World!! $it" }
-//                ) {
-//                    Text(
-//                        text = it,
-//                        modifier = Modifier
-//                            .fillMaxWidth()
-//                            .padding(4.dp)
-//                    )
-//                }
-//            }
-//
-//            @OptIn(ExperimentalToolbarApi::class)
-//            Button(
-//                modifier = Modifier
-//                    .padding(16.dp)
-//                    .align(Alignment.BottomEnd),
-//                onClick = {  }
-//            ) {
-//                Text(text = "Floating Button!")
-//            }
-//        }
-//
-//        Row(
-//            verticalAlignment = Alignment.CenterVertically
-//        ) {
-//            Checkbox(checked = enabled, onCheckedChange = { enabled = !enabled })
-//
-//            Text("Enable collapse/expand", fontWeight = FontWeight.Bold)
-//        }
-//    }
+fun MovieScreen(onBackClick: () -> Unit) {
     val state = rememberCollapsingToolbarScaffoldState()
     var enabled by remember { mutableStateOf(true) }
 
-    Box(modifier = Modifier.height(150.dp)) {
+    Box(modifier = Modifier.fillMaxSize()) {
         CollapsingToolbarScaffold(
             modifier = Modifier.fillMaxHeight(),
             state = state,
@@ -113,6 +50,7 @@ fun MovieScreen() {
                     modifier = Modifier
                         .parallax(0.5f)
                         .fillMaxWidth()
+                        .fillMaxHeight()
                         .graphicsLayer {
                             // change alpha of Image as the toolbar expands
                             alpha = state.toolbarState.progress
@@ -120,24 +58,24 @@ fun MovieScreen() {
                     contentScale = ContentScale.Crop,
                     contentDescription = null
                 )
-                IconButton(onClick = { /*TODO*/ }, modifier = Modifier.padding(top = 20.dp)) {
+                IconButton(onClick = onBackClick, modifier = Modifier.padding(top = 20.dp)) {
                     Icon(
                         Icons.Default.ArrowBack,
                         contentDescription = null
                     )
                 }
                 Text(
-                    text = "Title",
+                    text = "Побег из Шоушенка",
                     fontSize = textSize,
                     modifier = Modifier
                         .road(Alignment.TopStart, Alignment.BottomStart)
-                        .padding(40.dp, 35.dp, 16.dp, 16.dp),
+                        .padding(40.dp, 30.dp, 16.dp, 16.dp),
                     color = Color.White
                 )
-                Box(contentAlignment = Alignment.TopEnd) {
+                Box(modifier = Modifier.padding(start = 350.dp, top = 20.dp)) {
                     IconButton(
                         onClick = { /*TODO*/ },
-                        modifier = Modifier
+                        modifier = Modifier.padding(top = 0.dp)
                     ) {
                         Icon(
                             Icons.Default.FavoriteBorder,
@@ -147,9 +85,6 @@ fun MovieScreen() {
                         )
                     }
                 }
-
-                //}
-                //}
             },
         ) {
             LazyColumn(
@@ -163,7 +98,6 @@ fun MovieScreen() {
                     )
                 }
                 item() {
-
                 }
             }
 
@@ -174,7 +108,6 @@ fun MovieScreen() {
                     .background(MaterialTheme.colorScheme.secondary)
                     .height(40.dp)
             )
-
         }
     }
 }

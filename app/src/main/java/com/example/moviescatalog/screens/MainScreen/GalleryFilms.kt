@@ -18,13 +18,29 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import com.example.moviescatalog.R
+import com.example.moviescatalog.navigation.Screen
+
+val imbplexFamily = FontFamily(
+    Font(R.font.imbplexsansmedium, FontWeight.Medium),
+    Font(R.font.imbplexsansbold, FontWeight.Bold),
+    Font(R.font.imbplexsanslight, FontWeight.Light),
+    Font(R.font.imbplexsansregular, FontWeight.Normal)
+)
 
 @Composable
 fun GalleryFilms(@StringRes title: Int, modifier: Modifier = Modifier) {
+
         Text(
             text = stringResource(title),
-            style = MaterialTheme.typography.titleMedium,
+            fontFamily = imbplexFamily, fontWeight = FontWeight.Medium,
+            fontSize = 24.sp,
             color = Color(0xffEF3A01),
             modifier = Modifier
                 .padding(horizontal = 18.dp)
@@ -32,23 +48,11 @@ fun GalleryFilms(@StringRes title: Int, modifier: Modifier = Modifier) {
         )
 }
 
-//@Composable
-//fun GalleryFilmsColumn(modifier: Modifier = Modifier) {
-//    LazyColumn(
-//        verticalArrangement = Arrangement.spacedBy(18.dp),
-//        modifier = modifier
-//            .padding(start = 18.dp)
-//    ) {
-//        items(galleryFilmData) { item ->
-//            GalleryFilmsElement(item)
-//        }
-//    }
-//}
 
 @Composable
-fun GalleryFilmsElement(@DrawableRes drawable: Int) {
+fun GalleryFilmsElement(navController: NavHostController, @DrawableRes drawable: Int) {
     val ctx = LocalContext.current
-    Box(modifier = Modifier.padding(bottom = 18.dp, start = 18.dp)) {
+    Box(modifier = Modifier.padding(bottom = 18.dp, start = 18.dp) .clickable(onClick = {navController.navigate(Screen.Movie.route)})) {
         Image(
             painter = painterResource(drawable),
             contentDescription = null,
@@ -68,11 +72,12 @@ fun GalleryFilmsElement(@DrawableRes drawable: Int) {
         )
         Column(
             modifier = Modifier
+                .fillMaxWidth()
                 .padding(start = 149.dp)
         ) {
-            Text("Name", color = Color(0xffEF3A01))
-            Text("Year" + "*" + "Country", color = Color(0xffEF3A01))
-            Text("Drama, criminal", color = Color(0xffEF3A01))
+            Text("Люцифер", color = Color(0xffFFFFFF),fontFamily = imbplexFamily, fontWeight = FontWeight.Bold, fontSize = 24.sp,)
+            Text("1999 " + "•" + " США", color = Color(0xffFFFFFF),fontFamily = imbplexFamily, fontWeight = FontWeight.Medium,fontSize = 14.sp)
+            Text("драма, криминал", color = Color(0xffFFFFFF),fontFamily = imbplexFamily, fontWeight = FontWeight.Medium,fontSize = 14.sp)
         }
     }
 }

@@ -17,16 +17,18 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-
-
+import androidx.compose.ui.unit.sp
 
 @Composable
 fun FavouriteFilms(@StringRes title: Int, modifier: Modifier = Modifier) {
     Column(modifier.padding(top = 36.dp)) {
         Text(
             text = stringResource(title),
-            style = MaterialTheme.typography.titleMedium,
+            fontFamily = imbplexFamily,
+            fontWeight = FontWeight.Medium,
+            fontSize = 24.sp,
             color = Color(0xffEF3A01),
             modifier = Modifier
                 .padding(horizontal = 18.dp)

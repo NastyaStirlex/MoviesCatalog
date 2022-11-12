@@ -14,11 +14,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.moviescatalog.R
-import com.example.moviescatalog.navigation.Screens
+import com.example.moviescatalog.data.models.FavoritesViewModel
+import com.example.moviescatalog.navigation.Screen
 import kotlinx.coroutines.delay
 
 @Composable
-fun LaunchScreen(navController: NavHostController) {
+fun LaunchScreen(navController: NavHostController, favoritesViewModel:FavoritesViewModel) {
     val scale = remember {
         androidx.compose.animation.core.Animatable(0f)
     }
@@ -33,8 +34,9 @@ fun LaunchScreen(navController: NavHostController) {
                     OvershootInterpolator(2.7f).getInterpolation(it)
                 }))
         // Customize the delay time
+        favoritesViewModel.getFavorite();
         delay(2000L)
-        navController.navigate(Screens.Signin.route)
+        navController.navigate(Screen.Signin.route)
     }
     Column(modifier = Modifier
         .fillMaxSize()

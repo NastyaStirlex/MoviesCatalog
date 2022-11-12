@@ -1,12 +1,18 @@
-package com.example.moviescatalog.ProfileScreen
+package com.example.moviescatalog.screens.ProfileScreen
 
+import android.app.DatePickerDialog
+import android.util.Log
+import android.widget.DatePicker
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -14,15 +20,28 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.example.moviescatalog.R
+import com.example.moviescatalog.data.models.UserState
+import kotlinx.coroutines.launch
+import java.time.LocalDateTime
+import java.time.OffsetDateTime
+import java.time.ZoneOffset
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 @Composable
-fun ProfileScreen() {
+fun ProfileScreen(navController: NavHostController, onLogoutClick: () -> Unit) {
     var selectedMan by remember {mutableStateOf(false)}
     var selectedWoman by remember {mutableStateOf(false)}
+    val mDate = remember { mutableStateOf("") }
+    val mTime = remember { mutableStateOf("") }
+    var birthDate: String = ""
 
     Box(
         modifier = Modifier
@@ -118,11 +137,48 @@ fun ProfileScreen() {
                             Text(
                                 stringResource(R.string.text_birthdate),
                             )
+                            val mContext = LocalContext.current
+                            val mYear: Int
+                            val mMonth: Int
+                            val mDay: Int
+                            val mHour: Int
+                            val mMinute: Int
+                            val mSecond: Int
+
+                            val mCalendar = Calendar.getInstance().apply {  }
+
+                            mYear = mCalendar.get(Calendar.YEAR)
+                            mMonth = mCalendar.get(Calendar.MONTH)
+                            mDay = mCalendar.get(Calendar.DAY_OF_MONTH)
+                            mHour = mCalendar.get(Calendar.HOUR_OF_DAY)
+                            mMinute = mCalendar.get(Calendar.MINUTE)
+                            mSecond = mCalendar.get(Calendar.SECOND)
+
+
+                            mCalendar.time = Date()
+
+                            val mDatePickerDialog = DatePickerDialog(
+                                mContext,
+                                { _: DatePicker, mYear: Int, mMonth: Int, mDayOfMonth: Int ->
+                                    mDate.value = "$mDayOfMonth.${mMonth + 1}.$mYear"
+                                    val localdate = LocalDateTime.of(mYear, mMonth, mDay, mHour, mMinute, mSecond)
+                                    val offsetDate = OffsetDateTime.of(localdate, ZoneOffset.UTC)
+                                    birthDate = offsetDate.format(DateTimeFormatter.ISO_ZONED_DATE_TIME)
+                                    Log.d("stringDATE", birthDate)
+                                }, mYear, mMonth, mDay
+                            )
+
                             OutlinedTextField(
-                                readOnly = true,
-                                value = "",
-                                onValueChange = {},
-                                //placeholder = { Text(stringResource(com.example.moviescatalog.R.string.text_field_birthdate)) },
+                                enabled = false,
+                                value = mDate.value ?: "",
+                                trailingIcon = {
+                                    Icon(
+                                        Icons.Default.CalendarMonth,
+                                        contentDescription = null,
+                                        tint = Color(0xffD1D1D1)
+                                    )
+                                },
+                                onValueChange = { },
                                 colors = TextFieldDefaults.outlinedTextFieldColors(
                                     textColor = Color(0xffEF3A01),
                                     unfocusedBorderColor = Color(0xffB7B7B7),
@@ -133,6 +189,7 @@ fun ProfileScreen() {
                                 shape = RoundedCornerShape(9.dp),
                                 modifier = Modifier
                                     .fillMaxWidth()
+                                    .clickable(onClick = { mDatePickerDialog.show() })
                             )
                         }
                         Row(horizontalArrangement = Arrangement.SpaceEvenly, modifier = Modifier
@@ -181,7 +238,8 @@ fun ProfileScreen() {
                             )
                         }
                         TextButton(
-                            onClick = { /*TODO*/ }, modifier = Modifier
+                            onClick = onLogoutClick,
+                            modifier = Modifier
                                 .fillMaxWidth(),
                             shape = RoundedCornerShape(4.dp)
                         ) {
