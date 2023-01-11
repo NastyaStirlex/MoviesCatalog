@@ -2,16 +2,12 @@ package com.example.moviescatalog.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple80 = Color(0xFFD0BCFF)
-val PurpleGrey80 = Color(0xFFCCC2DC)
-val Pink80 = Color(0xFFEFB8C8)
-
-val Purple40 = Color(0xFF6650a4)
-val PurpleGrey40 = Color(0xFF625b71)
-val Pink40 = Color(0xFF7D5260)
-
-val Navy = Color(0xFF073042)
-val Blue = Color(0xFF4285F4)
-val LightBlue = Color(0xFFD7EFFE)
-val Chartreuse = Color(0xFFEFF7CF)
-val buttonColor = Color(0xFFEF3A01)
+val BrightWhite = Color(0xFFFFFFFF)
+val BaseWhite = Color(0xFFE7E7E7)
+val GraySilver = Color(0xFFB7B7B7)
+val GrayFaded = Color(0xFFD1D1D1)
+val Accent = Color(0xFFEF3A01)
+val AccentFaded = Color(0xFFFF8A48)
+val SealBrown = Color(0xFF150D0B)
+val GrayNero = Color(0xFF282828)
+val GrayBokara = Color(0xFF1C1A19)

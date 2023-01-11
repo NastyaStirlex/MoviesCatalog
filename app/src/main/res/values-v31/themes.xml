@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.MoviesCatalog" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowTranslucentStatus">true</item>/>
+        <item name="android:statusBarColor">@color/status_bar</item>
+        <item name="android:windowSplashScreenBackground">@color/ic_splash_background</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/splash_inset</item>
+        <item name="android:windowSplashScreenAnimationDuration">1000</item>
+        <item name="android:datePickerDialogTheme">@style/Theme.DatePickerDialog</item>
+    </style>
+
+    <style name="Theme.DatePickerDialog" parent="android:Theme.DeviceDefault.Light.Dialog">
+        <item name="android:datePickerStyle">@style/DataPickerStyle</item>
+        <item name="android:colorBackground">@color/background</item>
+        <item name="android:textColorPrimary">@color/bright_white</item>
+        <item name="android:textColorSecondary">@color/gray_faded</item>
+        <item name="android:colorAccent">@color/accent</item>
+    </style>
+
+    <style name="DataPickerStyle" parent="@android:style/Widget.Material.Light.DatePicker">
+        <item name="android:headerBackground">@color/background</item>
+    </style>
+
+</resources>

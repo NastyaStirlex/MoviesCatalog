@@ -27,7 +27,7 @@ object ApiClient {
     }
 
     @Provides
-    fun base_url() = "https://react-midterm.kreosoft.space/"
+    fun baseUrl() = "https://react-midterm.kreosoft.space/"
 
     @Provides
     @Singleton
@@ -35,16 +35,16 @@ object ApiClient {
         Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(
-            GsonConverterFactory.create(GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create())
-            //GsonConverterFactory.create()
-            //json.asConverterFactory("application/json".toMediaType())
+                GsonConverterFactory.create(
+                    //GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create()
+                )
             )
-            .addCallAdapterFactory(CoroutineCallAdapterFactory())
+            //.addCallAdapterFactory(CoroutineCallAdapterFactory())
             .client(
                 OkHttpClient.Builder()
-                    .connectTimeout(15, TimeUnit.SECONDS)
-                    .readTimeout(60, TimeUnit.SECONDS)
-                    .writeTimeout(60, TimeUnit.SECONDS)
+//                    .connectTimeout(15, TimeUnit.SECONDS)
+//                    .readTimeout(60, TimeUnit.SECONDS)
+//                    .writeTimeout(60, TimeUnit.SECONDS)
                     .addInterceptor(interceptor())
                     .build()
             )

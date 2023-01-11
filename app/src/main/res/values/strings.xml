@@ -19,15 +19,31 @@
     <string name="look">Смотреть</string>
     <string name="bottom_navigation_profile">Профиль</string>
     <string name="bottom_navigation_main">Главное</string>
+
     <string name="text_email">E-mail</string>
+    <string name="placeholder_email">Введите e-mail</string>
     <string name="text_link">Ссылка на аватарку</string>
+    <string name="placeholder_link">Введите ссылку</string>
     <string name="text_name">Имя</string>
+    <string name="placeholder_name">Введите свое имя</string>
     <string name="text_birthdate">Дата рождения</string>
     <string name="text_sex">Пол</string>
     <string name="button_save">Сохранить</string>
     <string name="button_log_out_of_account">Выйти из аккаунта</string>
+
     <string name="button_cancel">Отмена</string>
     <string name="dialog_title">Выберите дату</string>
+    <string name="about_film">О фильме</string>
+    <string name="genres">Жанры</string>
+    <string name="reviews">Отзывы</string>
 
+    <string name="post_review">Оставить отзыв</string>
+    <string name="review">Отзыв</string>
+    <string name="anonymous_review">Анонимный отзыв</string>
+    <string name="cancel">Отмена</string>
+
+    <string name="unknown_error">Произошла неизвестная ошибка, обратитесь к разработчикам приложения</string>
+    <string name="http_error">Произошла ошибка при обращении к серверу, обратитесь к разработчикам приложения</string>
+    <string name="network_error">Не удается подключиться к серверу</string>
 
 </resources>

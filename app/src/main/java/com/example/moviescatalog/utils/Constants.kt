@@ -8,11 +8,12 @@ object Constants {
         const val MAIN_SCREEN = "main_screen"
         const val MOVIE_SCREEN = "movie_screen"
         const val PROFILE_SCREEN = "profile_screen"
-        const val DATEBIRTH_DIALOG = "datebirth_dialog"
+        const val REVIEW_DIALOG = "review_dialog"
     }
     object page {
 
     }
+
     object tvid {
         val PARAM_TV_SHOW_ID = "tvShowId"
     }
