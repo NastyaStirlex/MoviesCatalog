@@ -1,8 +1,8 @@
-package com.example.moviescatalog.data.authapi.authorization
+package com.example.moviescatalog.data.dto
 
 import com.google.gson.annotations.SerializedName
 
-data class LoginBody (
+data class LoginBodyDto (
     @SerializedName("username")
     var username: String,
 

@@ -23,7 +23,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
+import coil.compose.AsyncImage
 import com.example.moviescatalog.navigation.Screen
+import com.example.moviescatalog.screens.MainScreen.models.MovieModel
 import com.example.moviescatalog.ui.theme.*
 
 @Composable
@@ -40,7 +42,7 @@ fun GalleryFilms(@StringRes title: Int) {
 
 
 @Composable
-fun GalleryFilmsElement(navController: NavController, @DrawableRes drawable: Int) {
+fun GalleryFilmsElement(onMovieClick: () -> Unit, movie: MovieModel) {
     Box(
         modifier = Modifier
             .padding(bottom = 18.dp, start = 18.dp)
@@ -48,50 +50,58 @@ fun GalleryFilmsElement(navController: NavController, @DrawableRes drawable: Int
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .clickable { navController.navigate(Screen.Movie.route) }
+                .clickable(onClick = onMovieClick)
         ) {
-            Image(
-                painter = painterResource(drawable),
+            AsyncImage(
+                model = movie.imageUrl,
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .size(100.dp, 144.dp)
             )
+
             Spacer(modifier = Modifier.width(16.dp))
+
             Column(
                 modifier = Modifier
                     .defaultMinSize(minHeight = 144.dp)
             ) {
                 Text(
-                    "Люцифер",
+                    movie.name,
                     color = BrightWhite,
                     style = Body
                 )
+
                 Spacer(modifier = Modifier.height(4.dp))
+
                 Text(
-                    "1999 " + "•" + " США",
+                    "${movie.year} • ${movie.country}",
                     color = BrightWhite,
                     style = BodySmall
                 )
+
                 Spacer(modifier = Modifier.height(4.dp))
+
                 Text(
-                    "драма, криминал",
+                    movie.genres,
                     color = BrightWhite,
                     style = BodySmall
                 )
+
                 Spacer(modifier = Modifier.height(8.dp))
                 Spacer(modifier = Modifier.weight(1f))
+
                 Box(
                     modifier = Modifier
                         .size(56.dp, 28.dp)
                         .background(
-                            color = Gray,
+                            color = if (movie.rating.isNaN()) Gray else Color.hsv(movie.hue, .99f, .67f),
                             shape = RoundedCornerShape(16.dp)
                         ),
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
-                        "4.5",
+                        if (movie.rating.isNaN()) "-" else movie.rating.format(1),
                         style = Body,
                         color = BrightWhite
                     )
@@ -100,3 +110,4 @@ fun GalleryFilmsElement(navController: NavController, @DrawableRes drawable: Int
         }
     }
 }
+fun Float.format(digits: Int) = "%.${digits}f".format(this)

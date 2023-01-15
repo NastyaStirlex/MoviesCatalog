@@ -1,7 +1,5 @@
 package com.example.moviescatalog.screens.MainScreen
 
-import android.widget.Toast
-import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -9,20 +7,27 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
+import com.example.moviescatalog.data.dto.MoviePageDto
 import com.example.moviescatalog.ui.theme.Accent
 import com.example.moviescatalog.ui.theme.H1
 
 @Composable
-fun FavouriteFilms(@StringRes title: Int) {
+fun FavouriteFilms(
+    @StringRes title: Int,
+    favourites: List<MoviePageDto>,
+    onMovieClick: (String) -> Unit,
+    onDeleteClick: (String) -> Unit
+) {
     Column(modifier = Modifier.padding(top = 36.dp)) {
         Text(
             text = stringResource(title),
@@ -32,46 +37,35 @@ fun FavouriteFilms(@StringRes title: Int) {
                 .padding(horizontal = 18.dp)
                 .padding(bottom = 25.dp)
         )
-        FavouriteFilmsRow()
+        FavouriteFilmsRow(favourites = favourites, onMovieClick = onMovieClick, onDeleteClick = onDeleteClick)
     }
 }
 
 @Composable
 fun FavouriteFilmsElement(
-    @DrawableRes drawable: Int,
-    modifier: Modifier = Modifier
+    favouriteMovie: MoviePageDto,
+    onMovieClick: (String) -> Unit,
+    onDeleteClick: (String) -> Unit
 ) {
-    val ctx = LocalContext.current
     Box(
         modifier = Modifier
             .size(100.dp, 144.dp)
     ) {
-        Image(
-            painter = painterResource(drawable),
+        AsyncImage(
+            model = favouriteMovie.poster,
             contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .fillMaxSize()
-                .clickable(
-                    onClick = {
-                        Toast
-                            .makeText(ctx, "Image clicked", Toast.LENGTH_SHORT)
-                            .show()
-                    }
-                )
+                .clip(RoundedCornerShape(4.dp))
+                .clickable(onClick = { onMovieClick.invoke(favouriteMovie.id) })
         )
 
-        // Крестик
         Row {
             Spacer(modifier = Modifier.weight(1f))
             Box(
                 modifier = Modifier
-                    //.clickable(onClick = onDelete)
-                    .clickable(onClick = {
-                        Toast
-                            .makeText(ctx, "Cross clicked", Toast.LENGTH_SHORT)
-                            .show()
-                    })
+                    .clickable(onClick = { onDeleteClick.invoke(favouriteMovie.id) })
                     .clip(CircleShape)
             ) {
                 Image(
@@ -91,23 +85,21 @@ fun FavouriteFilmsElement(
 }
 
 @Composable
-fun FavouriteFilmsRow(modifier: Modifier = Modifier) {
+fun FavouriteFilmsRow(
+    favourites: List<MoviePageDto>,
+    modifier: Modifier = Modifier,
+    onMovieClick: (String) -> Unit,
+    onDeleteClick: (String) -> Unit
+) {
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(18.dp),
         contentPadding = PaddingValues(horizontal = 18.dp),
         modifier = modifier
 
     ) {
-        items(favouriteData) { item ->
-            FavouriteFilmsElement(item)
+        items(favourites) { favouriteMovie ->
+            FavouriteFilmsElement(favouriteMovie = favouriteMovie, onMovieClick = onMovieClick, onDeleteClick = onDeleteClick)
         }
     }
 }
 
-private val favouriteData = mutableListOf(
-    com.example.moviescatalog.R.drawable.f_1,
-    com.example.moviescatalog.R.drawable.f_2,
-    com.example.moviescatalog.R.drawable.f_3,
-    com.example.moviescatalog.R.drawable.f_4,
-    com.example.moviescatalog.R.drawable.f_5,
-)

@@ -94,7 +94,7 @@ private fun RowScope.NavBarItem(
         ),
         onClick = {
             navController.navigate(route) {
-                popUpTo(Screen.Main.route) {
+                popUpTo("Main") {
                     saveState = true
                 }
                 launchSingleTop = true

@@ -3,13 +3,12 @@ package com.example.moviescatalog.screens.MovieScreen
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -19,16 +18,29 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.moviescatalog.R
+import com.example.moviescatalog.screens.MovieScreen.ReviewDialog.models.ReviewViewModel
+import com.example.moviescatalog.screens.MovieScreen.ReviewDialog.models.ReviewState
 import com.example.moviescatalog.ui.theme.*
-
-var comment = mutableStateOf("")
-var rating = mutableStateOf(0)
 
 @Composable
 fun ReviewDialog(
+    movieId: String,
+    reviewId: String? = null,
+    startComment: String = "",
+    startRating: Int = 0,
+    startIsAnonymous: Boolean = false,
     onCancel: () -> Unit,
-    onSave: () -> Unit
+    onSave: () -> Unit,
+    reviewViewModel: ReviewViewModel
 ) {
+
+    val reviewState by reviewViewModel.reviewState.observeAsState()
+    val isAnonymous by reviewViewModel.isAnonymous.observeAsState()
+    val comment by reviewViewModel.comment.observeAsState()
+    val rating by reviewViewModel.rating.observeAsState()
+    val correctnessFields by reviewViewModel.correctnessFields.observeAsState()
+    val isNewReview = reviewId == null
+
     Surface(
         shape = RoundedCornerShape(16.dp),
         color = GrayNero,
@@ -49,15 +61,18 @@ fun ReviewDialog(
             ) {
                 for (i in 1..10) {
                     ReviewStar(
-                        filled = i <= rating.value,
-                        onClick = { rating.value = i }
+                        filled = i <= rating!!,
+                        onClick = { reviewViewModel.ratingChange(i) }
                     )
                 }
             }
 
-            ReviewCommentField(
-                value = "codcsdc sdhj edbsk cs whjd  dd knsks, dvssejfojo"
-            )
+            comment?.let {
+                ReviewCommentField(
+                    comment = it,
+                    commentChange = reviewViewModel::commentChange
+                )
+            }
 
             Row(
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -69,13 +84,13 @@ fun ReviewDialog(
                     modifier = Modifier.weight(1f)
                 )
                 Box(
-                    modifier = Modifier
+                    modifier = (if (isNewReview) Modifier.clickable { reviewViewModel.anonymousChange(!isAnonymous!!) } else Modifier)
                         .size(24.dp)
                         .clip(RoundedCornerShape(4.dp))
                         .border(1.dp, GrayFaded, RoundedCornerShape(4.dp)),
                     contentAlignment = Alignment.Center
                 ) {
-                    if (true) { // if (value)
+                    if (isAnonymous == true) {
                         Image(
                             painter = painterResource(id = R.drawable.ic_check_mark),
                             colorFilter = ColorFilter.tint(Gray),
@@ -91,7 +106,7 @@ fun ReviewDialog(
                     modifier = Modifier
                         .fillMaxWidth(),
                     shape = RoundedCornerShape(4.dp),
-                    border = if (true)
+                    border = if (correctnessFields == true)
                         BorderStroke(1.dp, Accent)
                     else BorderStroke(1.dp, GraySilver),
                     colors = ButtonDefaults.outlinedButtonColors(
@@ -122,4 +137,43 @@ fun ReviewDialog(
             }
         }
     }
+
+    LaunchedEffect(key1 = Unit, block = {
+        comment?.let {
+            rating?.let { it1 ->
+                isAnonymous?.let { it2 ->
+                    reviewViewModel.loadReview(
+                        movieId = movieId,
+                        reviewId = reviewId,
+                        comment = it,
+                        rating = it1,
+                        isAnonymous = it2
+                    )
+                }
+            }
+        }
+    })
+
+    LaunchedEffect(key1 = Unit, block = {
+        startComment.let {
+            startRating.let { it1 ->
+                startIsAnonymous.let { it2 ->
+                    reviewViewModel.loadReview(
+                        movieId = movieId,
+                        reviewId = reviewId,
+                        comment = it,
+                        rating = it1,
+                        isAnonymous = it2
+                    )
+                }
+            }
+        }
+    })
+
+    LaunchedEffect(key1 = reviewState, block = {
+        when (reviewState) {
+            is ReviewState.AddReviewSuccessfull -> onSave.invoke()
+            else -> {}
+        }
+    })
 }

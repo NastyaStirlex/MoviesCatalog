@@ -8,5 +8,5 @@ data class MovieModel(
     val country: String,
     val genres: String,
     val rating: Float,
-    //val hue: Float = rating
+    val hue: Float = rating / 10f * 120
 )

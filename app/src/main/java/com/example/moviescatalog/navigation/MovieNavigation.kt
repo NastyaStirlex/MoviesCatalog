@@ -8,23 +8,35 @@ import com.example.moviescatalog.screens.MovieScreen.models.MovieViewModel
 
 fun NavGraphBuilder.movieNavigation(navController: NavController) {
     composable(
-        route = Screen.Movie.route,
-//        arguments = listOf(
-//            navArgument(Screen.Movie.MOVIE_ID) {
-//                type = NavType.StringType
-//            },
-//            navArgument(Screen.Movie.IS_FAVORITE) {
-//                type = NavType.BoolType
-//            }
-//        )
-    ) {
-        //val movieId = it.arguments?.getString(Screen.Movie.MOVIE_ID)
-        //val isFavorite = it.arguments?.getBoolean(Screen.Movie.IS_FAVORITE)
-        val movieViewModel = hiltViewModel<MovieViewModel>()
-        MovieScreen(
-            onBackClick = { navController.navigate("Main") },
-            onAddReviewClick = { navController.navigate("Review") },
-            movieViewModel
+        route = Screen.Movie.route + "/{movieId}" + "/{isFavourite}",
+        arguments = listOf(
+            navArgument("movieId") {
+                type = NavType.StringType
+            },
+            navArgument("isFavourite") {
+                type = NavType.BoolType
+            }
         )
+    ) { it ->
+        val movieId = it.arguments?.getString("movieId")
+        val isFavorite = it.arguments?.getBoolean("isFavourite")
+
+        val movieViewModel = hiltViewModel<MovieViewModel>()
+
+        if (movieId != null && isFavorite != null) {
+            MovieScreen(
+                onAddReviewClick = { movieId -> navController.navigate(Screen.AddReview.route + "/" + movieId) },
+                onEditReviewClick = { movieId, reviewId, comment, rating, isAnonymous ->
+                    navController.navigate(
+                        Screen.EditReview.route + "/" + movieId + "/" + reviewId + "/" + comment + "/" + rating + "/" + isAnonymous
+                    )
+                },
+                movieId = movieId,
+                isFavourite = isFavorite,
+                onBackClick = { navController.navigate("Main") },
+
+                movieViewModel
+            )
+        }
     }
 }

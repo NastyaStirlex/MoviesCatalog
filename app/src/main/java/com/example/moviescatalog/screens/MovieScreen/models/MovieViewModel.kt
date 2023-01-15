@@ -1,36 +1,45 @@
 package com.example.moviescatalog.screens.MovieScreen.models
 
+import android.content.Context
 import android.util.Log
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.moviescatalog.data.di.GetMoviesDetailsCallback
-import com.example.moviescatalog.data.models.MovieDetails
-import com.example.moviescatalog.data.models.MovieDetailsModel
+import com.example.moviescatalog.data.dto.MovieDetailsDto
 import com.example.moviescatalog.data.models.Review
+import com.example.moviescatalog.data.models.decodeToken
+import com.example.moviescatalog.data.repository.FavouritesRepository
+import com.example.moviescatalog.data.repository.JwtRepository
 import com.example.moviescatalog.data.repository.MovieRepository
+import com.example.moviescatalog.data.repository.ReviewRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.launch
+import org.json.JSONObject
 import javax.inject.Inject
 
 @HiltViewModel
-class MovieViewModel @Inject constructor(private val repository: MovieRepository) // подключаем нужные репозитории
-    : ViewModel() {
+class MovieViewModel @Inject constructor(
+    private val movieRepository: MovieRepository,
+    private val favouritesRepository: FavouritesRepository,
+    jwtRepository: JwtRepository,
+    private val reviewRepository: ReviewRepository,
+    @ApplicationContext application: Context
+) : ViewModel() {
+
+    val token = jwtRepository.getToken(context = application)
 
     private val _movieStateDate = MutableLiveData<MovieState>()
     val movieState: LiveData<MovieState>
         get() = _movieStateDate
 
-    private val _isMovieLoadingData =  MutableLiveData<Boolean>()
+    private val _isMovieLoadingData = MutableLiveData<Boolean>()
     val isMovieLoading: LiveData<Boolean>
         get() = _isMovieLoadingData
 
-    private val _isFavouriteData = MutableLiveData<Boolean>()
+    private val _isFavouriteData = MutableLiveData(false)
     val isFavouriteData: LiveData<Boolean>
         get() = _isFavouriteData
 
@@ -86,16 +95,27 @@ class MovieViewModel @Inject constructor(private val repository: MovieRepository
     val reviewsData: LiveData<List<Review>>
         get() = _reviewsData
 
-    private var movieId: String = ""
+    private val _userReviewData = MutableLiveData<Review>(null)
+    val userReview: LiveData<Review>
+        get() = _userReviewData
 
-    fun getMovieisDetails() = viewModelScope.launch {
-        if(movieState.value !is MovieState.Default)
+    private val _otherReviewsData = MutableLiveData<List<Review>>(null)
+    val otherReviews: LiveData<List<Review>>
+        get() = _otherReviewsData
+
+
+    private var movieID: String = ""
+
+    fun getMoviesDetails(movieId: String, isFavorite: Boolean) = viewModelScope.launch {
+        if (movieState.value !is MovieState.Default || movieID != movieId) {
             _movieStateDate.postValue(MovieState.Loading)
+            movieID = movieId
+        }
 
         _isMovieLoadingData.postValue(true)
-        repository.getDetails(
-            movieId = "5d50d333-73fd-4c8a-a2bb-08d9b9f3d2a2",
-            object : GetMoviesDetailsCallback<MovieDetailsModel> {
+        movieRepository.getDetails(
+            movieId = movieId,
+            object : GetMoviesDetailsCallback<MovieDetailsDto> {
                 override fun onSuccess(
                     id: String,
                     name: String?,
@@ -113,6 +133,8 @@ class MovieViewModel @Inject constructor(private val repository: MovieRepository
                     ageLimit: Int
                 ) {
                     _isMovieLoadingData.postValue(false)
+
+                    _isFavouriteData.postValue(isFavorite)
                     _nameData.postValue(name)
                     _movieImageUrlData.postValue(posterUrl)
                     _descriptionData.postValue(description)
@@ -127,6 +149,23 @@ class MovieViewModel @Inject constructor(private val repository: MovieRepository
                     _genresData.postValue(genres)
                     _reviewsData.postValue(reviews)
 
+                    val decodeToken = token?.let { decodeToken(it) }
+
+                    val uniqueName = decodeToken?.let { JSONObject(it).getString("unique_name") }
+                    if (uniqueName != null) {
+                        val review = isUserReview(uniqueName)
+                        if (review != null) {
+                            _userReviewData.value = review
+                            _otherReviewsData.postValue(_reviewsData.value?.filter { it.author.nickName != uniqueName }
+                                ?: emptyList())
+                        } else {
+                            _userReviewData.value = null
+                            _otherReviewsData.postValue(_reviewsData.value)
+                        }
+                    }
+
+
+
                     _movieStateDate.postValue(MovieState.Default)
                     Log.d("MovieDetails", "${_nameData.value}")
                 }
@@ -135,12 +174,32 @@ class MovieViewModel @Inject constructor(private val repository: MovieRepository
                     _movieStateDate.postValue(MovieState.UnknownError)
 
                     _isMovieLoadingData.postValue(false)
-                    Log.d("MovieDetailsError", "$error")
                 }
 
             })
     }
 
-    //private var movieId: String = ""
+    fun onToggleFavourite(movieId: String, isFavourite: Boolean) = viewModelScope.launch {
+        if (isFavourite) {
+            favouritesRepository.addFavourite(id = movieId, _movieStateDate)
+            _isFavouriteData.postValue(isFavourite)
+        } else {
+            favouritesRepository.deleteFavourite(id = movieId, _movieStateDate)
+            _isFavouriteData.postValue(isFavourite)
+        }
+    }
 
+    fun isUserReview(name: String): Review? {
+        return _reviewsData.value?.find { it.author.nickName == name }
+    }
+
+    fun onDeleteReviewClick() = viewModelScope.launch {
+        _userReviewData.value?.id?.let {
+            reviewRepository.deleteReview(
+                movieId = movieID,
+                reviewId = it,
+                state = _movieStateDate
+            )
+        }
+    }
 }

@@ -1,8 +1,10 @@
-package com.example.moviescatalog.data.models
+package com.example.moviescatalog.data.dto
 
+import com.example.moviescatalog.data.models.Genre
+import com.example.moviescatalog.data.models.Review
 import com.google.gson.annotations.SerializedName
 
-data class MovieDetailsModel(
+data class MovieDetailsDto(
     @SerializedName("ageLimit")
     val ageLimit: Int,
 

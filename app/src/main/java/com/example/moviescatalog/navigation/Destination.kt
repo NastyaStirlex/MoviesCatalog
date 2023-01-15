@@ -8,7 +8,7 @@ sealed class Screen(val route: String) {
     object Main: Screen(route = Constants.Screen.MAIN_SCREEN)
     object Movie: Screen(route = Constants.Screen.MOVIE_SCREEN)
     object Profile: Screen(route = Constants.Screen.PROFILE_SCREEN)
-    object Review: Screen(route = Constants.Screen.REVIEW_DIALOG)
-
+    object AddReview: Screen(route = Constants.Screen.ADD_REVIEW_DIALOG)
+    object EditReview: Screen(route = Constants.Screen.EDIT_REVIEW_DIALOG)
 }
 

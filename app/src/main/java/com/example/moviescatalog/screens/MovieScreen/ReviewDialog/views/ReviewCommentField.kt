@@ -24,7 +24,8 @@ import com.example.moviescatalog.ui.theme.SealBrown
 
 @Composable
 fun ReviewCommentField(
-    value: String
+    comment: String,
+    commentChange: (String) -> Unit
 ) {
     Surface(
         shape = RoundedCornerShape(6.dp),
@@ -35,8 +36,8 @@ fun ReviewCommentField(
             .height(120.dp)
     ) {
         TextField(
-            value = comment.value,
-            onValueChange = { comment.value = it },
+            value = comment,
+            onValueChange = commentChange,
             textStyle = BodySmall,
             placeholder = {
                 Text(

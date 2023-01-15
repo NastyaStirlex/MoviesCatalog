@@ -8,8 +8,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
+import com.example.moviescatalog.data.repository.JwtRepository
 import com.example.moviescatalog.navigation.SetupNavHost
-import com.example.moviescatalog.ui.theme.SplashScreenTheme
+import com.example.moviescatalog.ui.theme.MoviesCatalogTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -18,14 +19,15 @@ class MainActivity : ComponentActivity() {
 
         super.onCreate(savedInstanceState)
         setContent {
-            SplashScreenTheme {
+            MoviesCatalogTheme {
                 Surface(
                     modifier = Modifier
                         .fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
                     val navController = rememberNavController()
-                    SetupNavHost(navController)
+                    val jwtRepository = JwtRepository()
+                    SetupNavHost(navController, this, jwtRepository)
                 }
             }
         }
