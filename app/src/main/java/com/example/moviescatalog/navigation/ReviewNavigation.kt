@@ -25,8 +25,8 @@ fun NavGraphBuilder.reviewNavigation(navController: NavController) {
                 val reviewViewModel = hiltViewModel<ReviewViewModel>()
                 ReviewDialog(
                     movieId = movieId,
-                    onCancel = { navController.navigate(Screen.Main.route) },
-                    onSave = { navController.navigate(Screen.Main.route) },
+                    onCancel = { navController.navigateUp() },
+                    onSave = { navController.navigateUp() },
                     reviewViewModel = reviewViewModel
                 )
             }
