@@ -102,7 +102,7 @@ fun ReviewDialog(
 
             Column {
                 OutlinedButton(
-                    onClick = onSave,
+                    onClick = reviewViewModel::onSaveClick,
                     modifier = Modifier
                         .fillMaxWidth(),
                     shape = RoundedCornerShape(4.dp),
@@ -138,21 +138,6 @@ fun ReviewDialog(
         }
     }
 
-    LaunchedEffect(key1 = Unit, block = {
-        comment?.let {
-            rating?.let { it1 ->
-                isAnonymous?.let { it2 ->
-                    reviewViewModel.loadReview(
-                        movieId = movieId,
-                        reviewId = reviewId,
-                        comment = it,
-                        rating = it1,
-                        isAnonymous = it2
-                    )
-                }
-            }
-        }
-    })
 
     LaunchedEffect(key1 = Unit, block = {
         startComment.let {

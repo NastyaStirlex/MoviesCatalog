@@ -147,7 +147,8 @@ class MovieViewModel @Inject constructor(
                     _feesData.postValue(fees)
                     _ageData.postValue(ageLimit)
                     _genresData.postValue(genres)
-                    _reviewsData.postValue(reviews)
+                    _reviewsData.value = reviews
+                    Log.d("Reviews: ", _reviewsData.value!![0].reviewText)
 
                     val decodeToken = token?.let { decodeToken(it) }
 
@@ -158,6 +159,7 @@ class MovieViewModel @Inject constructor(
                             _userReviewData.value = review
                             _otherReviewsData.postValue(_reviewsData.value?.filter { it.author.nickName != uniqueName }
                                 ?: emptyList())
+
                         } else {
                             _userReviewData.value = null
                             _otherReviewsData.postValue(_reviewsData.value)
