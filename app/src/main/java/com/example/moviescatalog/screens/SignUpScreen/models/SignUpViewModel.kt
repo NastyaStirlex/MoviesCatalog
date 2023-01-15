@@ -1,18 +1,13 @@
 package com.example.moviescatalog.screens.SignUpScreen.models
 
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.moviescatalog.data.Event
 import com.example.moviescatalog.data.dto.JwtTokenDto
 import com.example.moviescatalog.data.repository.AccountRepository
-import com.example.moviescatalog.screens.SignInScreen.models.Status
-import com.example.moviescatalog.screens.SignInScreen.models.ValidationEvent
-import com.example.moviescatalog.screens.SignInScreen.toLoginBodyDto
 import com.example.moviescatalog.screens.SignUpScreen.toRegisterBodyDto
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
