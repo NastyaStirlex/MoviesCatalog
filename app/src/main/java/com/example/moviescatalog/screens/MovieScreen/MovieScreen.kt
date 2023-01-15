@@ -400,7 +400,7 @@ fun MovieScreen(
     }
     // API call
     LaunchedEffect(key1 = refreshCount) {
-        isFavourite.let { movieViewModel.getMoviesDetails(movieId = movieId, isFavorite = it) }
+        isFavourite?.let { movieViewModel.getMoviesDetails(movieId = movieId, isFavorite = it) }
     }
 }
 
