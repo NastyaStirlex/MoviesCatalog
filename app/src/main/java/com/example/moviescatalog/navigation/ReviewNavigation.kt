@@ -25,8 +25,8 @@ fun NavGraphBuilder.reviewNavigation(navController: NavController) {
                 val reviewViewModel = hiltViewModel<ReviewViewModel>()
                 ReviewDialog(
                     movieId = movieId,
-                    onCancel = { navController.navigateUp() },
-                    onSave = { navController.navigateUp() },
+                    onCancel = { navController.navigate(Screen.Main.route) },
+                    onSave = { navController.navigate(Screen.Main.route) },
                     reviewViewModel = reviewViewModel
                 )
             }
@@ -66,8 +66,8 @@ fun NavGraphBuilder.reviewNavigation(navController: NavController) {
                     startComment = comment,
                     startRating = rating,
                     startIsAnonymous = isAnonymous,
-                    onCancel = { navController.navigateUp() },
-                    onSave = { navController.navigateUp() },
+                    onCancel = { navController.navigate(Screen.Main.route) },
+                    onSave = { navController.navigate(Screen.Main.route) },
                     reviewViewModel = reviewViewModel
                 )
             }

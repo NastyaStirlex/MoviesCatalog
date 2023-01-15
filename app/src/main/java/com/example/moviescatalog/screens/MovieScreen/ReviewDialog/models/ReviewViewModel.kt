@@ -75,6 +75,7 @@ class ReviewViewModel @Inject constructor(
                     )
                 }
             }?.let { reviewRepository.addReview(movieId = movieId, it, _reviewStateDate) }
+            _reviewStateDate.value = ReviewState.AddReviewSuccessfull
         } else {
             _ratingData.value?.let {
                 _isAnonymousData.value?.let { it1 ->
@@ -92,8 +93,10 @@ class ReviewViewModel @Inject constructor(
                     _reviewStateDate
                 )
             }
+            _reviewStateDate.value = ReviewState.AddReviewSuccessfull
         }
 
     }
+
 
 }

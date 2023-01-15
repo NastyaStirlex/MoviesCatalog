@@ -29,7 +29,7 @@ class ReviewRepository @Inject constructor(
                 movieId = movieId,
                 addReviewBody = addReviewBody
             )
-            state.postValue(ReviewState.AddReviewSuccessfull)
+            state.value = ReviewState.AddReviewSuccessfull
         } catch (e: Exception) {
             when (e) {
                 is HttpException -> {
@@ -59,7 +59,7 @@ class ReviewRepository @Inject constructor(
                 id = reviewId,
                 addReviewBody = addReviewBody
             )
-            state.postValue(ReviewState.AddReviewSuccessfull)
+            state.value = ReviewState.AddReviewSuccessfull
         } catch (e: Exception) {
             when (e) {
                 is HttpException -> {
