@@ -7,7 +7,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.moviescatalog.data.Event
 import com.example.moviescatalog.data.di.GetProfileCallback
 import com.example.moviescatalog.data.dto.ProfileDto
 import com.example.moviescatalog.data.repository.AccountRepository

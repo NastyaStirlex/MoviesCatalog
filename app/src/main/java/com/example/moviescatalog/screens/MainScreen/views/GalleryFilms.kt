@@ -1,9 +1,6 @@
-package com.example.moviescatalog.screens.MainScreen
+package com.example.moviescatalog.screens.MainScreen.views
 
-import android.widget.Toast
-import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -15,17 +12,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Gray
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
-import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
-import com.example.moviescatalog.navigation.Screen
-import com.example.moviescatalog.screens.MainScreen.models.MovieModel
+import com.example.moviescatalog.data.models.Movie
 import com.example.moviescatalog.ui.theme.*
 
 @Composable
@@ -42,7 +32,7 @@ fun GalleryFilms(@StringRes title: Int) {
 
 
 @Composable
-fun GalleryFilmsElement(onMovieClick: () -> Unit, movie: MovieModel) {
+fun GalleryFilmsElement(onMovieClick: () -> Unit, movie: Movie) {
     Box(
         modifier = Modifier
             .padding(bottom = 18.dp, start = 18.dp)

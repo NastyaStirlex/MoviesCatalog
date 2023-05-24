@@ -1,15 +1,10 @@
 package com.example.moviescatalog.screens.MovieScreen
 
 import androidx.compose.animation.animateColor
-import androidx.compose.foundation.lazy.items
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.*
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.CornerBasedShape
-import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -95,7 +90,12 @@ fun MovieScreen(
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(320.dp)
-                            .clip(RoundedCornerShape(16.dp).roundedAtBottom())
+                            .clip(RoundedCornerShape(
+                                topStart = 0.dp,
+                                topEnd = 0.dp,
+                                bottomEnd = 16.dp,
+                                bottomStart = 16.dp
+                            ))
                             .graphicsLayer {
                                 alpha =
                                     1f - (scrollState.value.toFloat() / scrollState.maxValue)
@@ -148,7 +148,6 @@ fun MovieScreen(
                 }
 
 
-
                 description?.let { Description(it) }
 
                 Spacer(modifier = Modifier.height(16.dp))
@@ -171,7 +170,6 @@ fun MovieScreen(
                     )
                 }
 
-
                 Spacer(modifier = Modifier.height(16.dp))
 
                 Genres(genres)
@@ -179,7 +177,6 @@ fun MovieScreen(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 // REVIEWS TITLE
-
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -191,7 +188,9 @@ fun MovieScreen(
                         color = BrightWhite,
                         modifier = Modifier.padding(bottom = 8.dp)
                     )
+
                     Spacer(modifier = Modifier.weight(1f))
+
                     if (userReview == null) {
                         Image(
                             painter = painterResource(R.drawable.ic_plus),
@@ -219,13 +218,13 @@ fun MovieScreen(
                                 verticalAlignment = Alignment.CenterVertically,
                                 horizontalArrangement = Arrangement.spacedBy(8.dp)
                             ) {
-                                if (!userReview!!.isAnonymous && userReview!!.author.avatar.isNotBlank()) {
+                                if (!userReview!!.isAnonymous) {
                                     AsyncImage(
                                         model = userReview!!.author.avatar,
                                         contentDescription = null,
                                         contentScale = ContentScale.Crop,
                                         modifier = Modifier
-                                            .size(88.dp)
+                                            .size(40.dp)
                                             .clip(CircleShape)
                                     )
                                 } else {
@@ -233,7 +232,7 @@ fun MovieScreen(
                                         painter = painterResource(R.drawable.avatar),
                                         contentDescription = null,
                                         modifier = Modifier
-                                            .size(88.dp)
+                                            .size(40.dp)
                                             .clip(CircleShape)
                                     )
                                 }
@@ -398,17 +397,9 @@ fun MovieScreen(
         }
 
     }
+
     // API call
     LaunchedEffect(key1 = refreshCount) {
-        isFavourite?.let { movieViewModel.getMoviesDetails(movieId = movieId, isFavorite = it) }
+        isFavourite.let { movieViewModel.getMoviesDetails(movieId = movieId, isFavorite = it) }
     }
-}
-
-fun CornerBasedShape.roundedAtBottom(): CornerBasedShape {
-    return copy(
-        topStart = CornerSize(0.dp),
-        topEnd = CornerSize(0.dp),
-        bottomStart = bottomStart,
-        bottomEnd = bottomEnd
-    )
 }

@@ -18,7 +18,7 @@ import javax.inject.Inject
 
 class UserRepository @Inject constructor(
     private val apiService: ApiService,
-    private val jwtRepository: JwtRepository,
+    jwtRepository: JwtRepository,
     @ApplicationContext application: Context
 ) {
 

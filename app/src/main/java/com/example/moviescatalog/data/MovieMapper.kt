@@ -1,11 +1,11 @@
 package com.example.moviescatalog.data
 
 import com.example.moviescatalog.data.dto.MoviePageDto
-import com.example.moviescatalog.screens.MainScreen.models.MovieModel
+import com.example.moviescatalog.data.models.Movie
 
-fun MoviePageDto.toMovie(): MovieModel {
+fun MoviePageDto.toMovie(): Movie {
 
-    return  MovieModel(
+    return  Movie(
         movieId = id,
         name = checkNotNull(name),
         imageUrl = checkNotNull(poster),

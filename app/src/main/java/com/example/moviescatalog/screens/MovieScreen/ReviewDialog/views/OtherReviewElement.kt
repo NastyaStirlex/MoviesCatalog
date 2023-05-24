@@ -47,7 +47,7 @@ fun OtherReviewElement(
                         contentDescription = null,
                         contentScale = ContentScale.Crop,
                         modifier = Modifier
-                            .size(88.dp)
+                            .size(40.dp)
                             .clip(CircleShape)
                     )
                 } else {
@@ -55,7 +55,7 @@ fun OtherReviewElement(
                         painter = painterResource(com.example.moviescatalog.R.drawable.avatar),
                         contentDescription = null,
                         modifier = Modifier
-                            .size(88.dp)
+                            .size(40.dp)
                             .clip(CircleShape)
                     )
                 }
